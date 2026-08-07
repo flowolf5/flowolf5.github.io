@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rilievo · il territorio letto dai dati</title>
+<meta name="description" content="Il clima e il territorio dell'Emilia raccontati con dati satellitari verificati, non con opinioni.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EBEFEE; --paper2:#FFFFFF; --line:#C8D1CF; --ink:#0F171D; --ink2:#16222A;
+    --lineD:#2B3944; --text:#141C22; --sub:#5B6A72;
+    --rust:#B3432B; --teal:#1F5C6B; --amber:#C4872E;
+    --disp:'Space Grotesk',system-ui,sans-serif;
+    --body:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--text);font-family:var(--body);line-height:1.6}
+  a{color:inherit}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+
+  /* ---------------- NAV ---------------- */
+  nav{position:sticky;top:0;z-index:30;background:rgba(15,23,29,.94);backdrop-filter:blur(6px);
+      border-bottom:1px solid var(--lineD)}
+  .navin{max-width:1040px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;
+         justify-content:space-between;color:#EDEAE0}
+  .brand{font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px}
+  .brand .mk{width:9px;height:9px;border-radius:50%;background:var(--rust);box-shadow:0 0 0 3px rgba(179,67,43,.25)}
+  .navlinks{display:flex;gap:22px;font-family:var(--mono);font-size:12px;letter-spacing:.05em}
+  .navlinks a{opacity:.75;text-decoration:none} .navlinks a:hover{opacity:1}
+  @media(max-width:640px){.navlinks{display:none}}
+
+  /* ---------------- HERO ---------------- */
+  .hero{position:relative;background:var(--ink);color:#F2F0E8;overflow:hidden}
+  .heroimg{position:absolute;inset:0;background-size:cover;background-position:52% 40%;opacity:.34;
+           filter:saturate(1.15) contrast(1.05)}
+  .heroshade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,23,29,.35) 0%,rgba(15,23,29,.55) 45%,var(--ink) 96%)}
+  .heroin{position:relative;padding:76px 24px 58px;max-width:1040px;margin:0 auto}
+  .heroin .eyebrow{color:#F0A47A;margin-bottom:18px}
+  .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(34px,5.6vw,58px);letter-spacing:-.02em;
+           line-height:1.04;max-width:15ch}
+  .hero h1 em{font-style:normal;color:#F0A47A}
+  .hero .sub{margin-top:20px;font-size:16.5px;color:#B9C4C8;max-width:56ch;line-height:1.65}
+
+  .readout{display:flex;gap:0;margin-top:38px;border-top:1px solid rgba(237,234,224,.18);padding-top:22px;
+           flex-wrap:wrap;gap-row:14px}
+  .rd{padding:0 26px 0 0;margin-right:26px;border-right:1px solid rgba(237,234,224,.16)}
+  .rd:last-child{border-right:none}
+  .rd .n{font-family:var(--disp);font-weight:700;font-size:30px;color:#F2F0E8;letter-spacing:-.02em}
+  .rd .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:#8A98A0;margin-top:3px;text-transform:uppercase;max-width:16ch}
+
+  /* ---------------- SEZIONI ---------------- */
+  section{padding:64px 0}
+  .sechd{margin-bottom:34px;max-width:64ch}
+  .sechd .eyebrow{color:var(--rust);margin-bottom:10px}
+  .sechd h2{font-family:var(--disp);font-weight:600;font-size:clamp(24px,3.4vw,32px);letter-spacing:-.015em;line-height:1.15}
+  .sechd p{margin-top:12px;color:var(--sub);font-size:15px}
+
+  /* metodo: tre principi */
+  .method{background:var(--paper2);border:1px solid var(--line);border-radius:2px}
+  .mrow{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--line)}
+  .mrow:last-child{border-bottom:none}
+  @media(max-width:760px){.mrow{grid-template-columns:1fr}}
+  .mcell{padding:26px 24px;border-right:1px solid var(--line)}
+  .mcell:last-child{border-right:none}
+  @media(max-width:760px){.mcell{border-right:none;border-bottom:1px solid var(--line)}.mcell:last-child{border-bottom:none}}
+  .mcell .k{font-family:var(--mono);font-size:10.5px;color:var(--sub);letter-spacing:.1em;margin-bottom:8px}
+  .mcell h4{font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:7px}
+  .mcell p{font-size:13.5px;color:var(--sub);line-height:1.55}
+
+  /* log di rilevamento */
+  .log{border-top:1px solid var(--line)}
+  .entry{display:grid;grid-template-columns:112px 1fr 220px;gap:26px;padding:28px 0;border-bottom:1px solid var(--line)}
+  @media(max-width:760px){.entry{grid-template-columns:1fr;gap:12px}}
+  .entry .date{font-family:var(--mono);font-size:12px;color:var(--sub);padding-top:3px}
+  .entry .date b{display:block;color:var(--text);font-size:14px;font-weight:600;margin-bottom:2px}
+  .entry h3{font-family:var(--disp);font-weight:600;font-size:19px;letter-spacing:-.01em;margin-bottom:8px}
+  .entry p{font-size:14px;color:var(--sub);line-height:1.6;max-width:52ch}
+  .entry .stat{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:12.5px;
+               background:#F0E6DE;color:#8C371F;padding:3px 9px;border-radius:3px}
+  .entry .thumb{width:220px;height:150px;background-size:cover;background-position:center;
+                border:1px solid var(--line);border-radius:2px}
+  @media(max-width:760px){.entry .thumb{width:100%;height:170px}}
+
+  /* CTA mappa interattiva */
+  .cta{background:var(--ink2);color:#EDEAE0;border-radius:3px;padding:44px;display:grid;
+       grid-template-columns:1.3fr 1fr;gap:34px;align-items:center}
+  @media(max-width:760px){.cta{grid-template-columns:1fr;padding:30px}}
+  .cta .eyebrow{color:#F0A47A;margin-bottom:12px}
+  .cta h3{font-family:var(--disp);font-weight:600;font-size:26px;letter-spacing:-.015em;line-height:1.2}
+  .cta p{margin-top:12px;color:#AEBAC0;font-size:14.5px;line-height:1.6}
+  .btn{display:inline-flex;align-items:center;gap:9px;margin-top:20px;background:var(--rust);color:#fff;
+       font-family:var(--body);font-weight:600;font-size:14.5px;padding:12px 20px;border-radius:3px;
+       text-decoration:none;transition:background .15s}
+  .btn:hover{background:#9A3623}
+  .ctaviz{border:1px solid rgba(237,234,224,.2);border-radius:3px;padding:18px;background:rgba(255,255,255,.03)}
+  .ctaviz .g{height:10px;border-radius:5px;background:linear-gradient(90deg,#1a3a8f,#2e7fd4,#69c0e8,#f7f0a8,#f9c14a,#f08a2e,#dd4b2a,#a8261c,#6b0f0c);margin-bottom:8px}
+  .ctaviz .gl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:#8A98A0;margin-bottom:16px}
+  .ctaviz .miniread{font-family:var(--mono);font-size:11px;color:#8A98A0;line-height:1.8}
+  .ctaviz .miniread b{color:#F2F0E8;font-size:13px}
+
+  /* pubblicazioni */
+  .pubs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.pubs{grid-template-columns:1fr}}
+  .pub{background:var(--paper2);border:1px solid var(--line);border-radius:2px;padding:22px;
+       display:flex;flex-direction:column;justify-content:space-between}
+  .pub h4{font-family:var(--disp);font-weight:600;font-size:16.5px;margin-bottom:8px;line-height:1.3}
+  .pub p{font-size:13px;color:var(--sub);line-height:1.55;margin-bottom:14px}
+  .pub a{font-family:var(--mono);font-size:11.5px;color:var(--rust);text-decoration:none;letter-spacing:.03em}
+  .pub a:hover{text-decoration:underline}
+
+  footer{border-top:1px solid var(--line);padding:36px 0 50px}
+  footer .fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
+  footer .fcol{font-size:12.5px;color:var(--sub);line-height:1.8;max-width:46ch}
+  footer .fcol b{color:var(--text)}
+  footer .fbrand{font-family:var(--disp);font-weight:700;font-size:15px;margin-bottom:8px;color:var(--text)}
+
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav><div class="navin">
+  <div class="brand"><span class="mk"></span>RILIEVO</div>
+  <div class="navlinks">
+    <a href="#log">Rilevamenti</a><a href="#metodo">Metodo</a><a href="mappa-interattiva.html">Mappa</a><a href="#pubblicazioni">Documenti</a>
+  </div>
+</div></nav>
+
+<header class="hero">
+  <div class="heroimg" style="background-image:url('hero.jpg')"></div>
+  <div class="heroshade"></div>
+  <div class="heroin">
+    <div class="eyebrow">Emilia-Romagna · osservazione satellitare del territorio</div>
+    <h1>Il territorio,<br>letto dai dati<br><em>non dalle opinioni.</em></h1>
+    <p class="sub">Dati satellitari pubblici, verificati punto per punto, tradotti in mappe che chiunque può leggere. Si comincia dal calore delle città: dove si concentra, perché, e cosa dicono vent'anni di misure.</p>
+
+    <div class="readout">
+      <div class="rd"><div class="n">8,0 °C</div><div class="l">scarto massimo misurato in città, stesso istante</div></div>
+      <div class="rd"><div class="n">−7,93</div><div class="l">°C per ogni punto di verde in più (NDVI), su 280.000 pixel</div></div>
+      <div class="rd"><div class="n">+1,16</div><div class="l">°C per decennio l'inverno padano, quasi il triplo dell'estate</div></div>
+      <div class="rd"><div class="n">21</div><div class="l">anni di serie storica satellitare analizzata, 2005–2025</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="metodo">
+    <div class="sechd">
+      <div class="eyebrow">Come lavoriamo</div>
+      <h2>Tre regole, sempre le stesse</h2>
+      <p>Un dato satellitare grezzo è illeggibile quanto un modulo del catasto. Il lavoro qui non è produrre mappe colorate, è tradurle senza tradirle.</p>
+    </div>
+    <div class="method">
+      <div class="mrow">
+        <div class="mcell">
+          <div class="k">01</div>
+          <h4>Solo dati verificabili</h4>
+          <p>NASA, ESA/Copernicus, ARPAE, NOAA. Ogni numero riporta la fonte, il satellite e la data. Niente stime senza etichetta.</p>
+        </div>
+        <div class="mcell">
+          <div class="k">02</div>
+          <h4>Le anomalie si raccontano</h4>
+          <p>Quando un dato non torna — un trend che contraddice l'intuizione, un pixel impossibile — lo scriviamo. È lì che di solito c'è la scoperta vera.</p>
+        </div>
+        <div class="mcell">
+          <div class="k">03</div>
+          <h4>Misurato ≠ stimato</h4>
+          <p>Dove il dettaglio è calcolato e non osservato direttamente dal satellite, lo diciamo in chiaro, con il margine d'errore atteso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="log">
+    <div class="sechd">
+      <div class="eyebrow">Registro dei rilevamenti</div>
+      <h2>Come si è costruita l'indagine</h2>
+      <p>In ordine cronologico: dal singolo isolato di Reggio Emilia fino all'intera pianura, vent'anni indietro nel tempo.</p>
+    </div>
+
+    <div class="log">
+      <div class="entry">
+        <div class="date"><b>Ago 2025</b>16 rilevazioni manuali</div>
+        <div>
+          <h3>Reggio Emilia, punto per punto</h3>
+          <p>Sedici luoghi della città misurati a mano sugli stessi dati satellitari, nello stesso istante: piazze, parchi, un piazzale industriale, un campo di stoppie in aperta campagna.</p>
+          <span class="stat">Scoperta: non è la città, è il suolo nudo</span>
+        </div>
+        <div class="thumb" style="background-image:url('sedici-punti.jpg')"></div>
+      </div>
+
+      <div class="entry">
+        <div class="date"><b>2024</b>Composito estivo, 10 m</div>
+        <div>
+          <h3>La mappa via per via</h3>
+          <p>Temperatura di superficie stimata a 10 metri di dettaglio, calibrata sulla relazione reale tra verde e calore. Un viale alberato si distingue da una via spoglia.</p>
+          <span class="stat">Centro storico: 44,0 °C senza verde, 39,7 °C con verde denso</span>
+        </div>
+        <div class="thumb" style="background-image:url('log-1.jpg')"></div>
+      </div>
+
+      <div class="entry">
+        <div class="date"><b>2005–2025</b>Pianura Padana</div>
+        <div>
+          <h3>Tutta la pianura, quattro stagioni</h3>
+          <p>Da Torino a Venezia, dalle Alpi all'Appennino: temperatura di giorno e di notte, stagione per stagione, sulla stessa scala di colore per un confronto onesto.</p>
+          <span class="stat">Notti d'estate: +10 °C sulle notti d'autunno</span>
+        </div>
+        <div class="thumb" style="background-image:url('log-2.jpg')"></div>
+      </div>
+
+      <div class="entry">
+        <div class="date"><b>2005–2025</b>Regressione su 21 anni</div>
+        <div>
+          <h3>Come cambia il clima, stagione per stagione</h3>
+          <p>Non due annate a confronto — una tendenza calcolata su ventuno estati, ventuno inverni, pixel per pixel. L'inverno risulta la stagione che si scalda più in fretta.</p>
+          <span class="stat">Inverno: +1,16 °C/decennio, quasi il triplo dell'estate</span>
+        </div>
+        <div class="thumb" style="background-image:url('log-3.jpg')"></div>
+      </div>
+
+      <div class="entry">
+        <div class="date"><b>2024</b>Incrocio caldo + verde</div>
+        <div>
+          <h3>Dove intervenire per prime</h3>
+          <p>Le superfici che sommano temperatura estrema e vegetazione quasi assente: 1.663 ettari, il 6,6% del territorio comunale, concentrati in 34 aree.</p>
+          <span class="stat">Le due aree più estese sono industriali, non residenziali</span>
+        </div>
+        <div class="thumb" style="background-image:url('log-4.jpg')"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mappa">
+    <div class="cta">
+      <div>
+        <div class="eyebrow">Strumento interattivo</div>
+        <h3>Tocca un punto della città.<br>Leggi quanto scotta.</h3>
+        <p>Temperatura di superficie a 10 metri di dettaglio, le quattro stagioni, e vent'anni di tendenza — tutto su una mappa che risponde al clic, per qualunque punto di Reggio Emilia.</p>
+        <a class="btn" href="mappa-interattiva.html">Apri la mappa interattiva →</a>
+      </div>
+      <div class="ctaviz">
+        <div class="g"></div>
+        <div class="gl"><span>34,6 °C</span><span>45,7 °C</span></div>
+        <div class="miniread">
+          PUNTO SELEZIONATO<br>
+          <b>43,6 °C</b> — centro storico<br>
+          +4,5 °C sulla media cittadina<br>
+          vegetazione: assente o quasi
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pubblicazioni">
+    <div class="sechd">
+      <div class="eyebrow">Documenti completi</div>
+      <h2>Lo studio, per intero</h2>
+      <p>Le mappe di sintesi sono un punto di partenza. Qui i documenti completi, con metodo, fonti e i limiti dichiarati di ogni analisi.</p>
+    </div>
+    <div class="pubs">
+      <div class="pub">
+        <div>
+          <h4>Il clima che cambia — vent'anni di temperature nella Pianura Padana</h4>
+          <p>Le otto mappe stagionali, il trend 2005–2025, il caso Reggio Emilia, la verifica quantitativa sull'effetto di boschi e corsi d'acqua.</p>
+        </div>
+        <a href="Report_Clima_PianuraPadana.pdf">Apri il PDF →</a>
+      </div>
+      <div class="pub">
+        <div>
+          <h4>Raffreddare Reggio Emilia — proposte di intervento</h4>
+          <p>Le aree prioritarie individuate dai dati e quattro casi reali già misurati altrove: Medellín, Barcellona, Milano, Parigi.</p>
+        </div>
+        <a href="Reggio_Piano_Raffrescamento.pdf">Apri il PDF →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div class="fcol">
+      <div class="fbrand">RILIEVO</div>
+      Dati pubblici tradotti in mappe leggibili. Un progetto indipendente sul territorio dell'Emilia-Romagna.
+    </div>
+    <div class="fcol">
+      <b>Fonti principali</b><br>
+      NASA Landsat 8-9, VIIRS, MODIS Terra · ESA Copernicus Sentinel-2 · NOAA OISST · ARPAE Emilia-Romagna · Google Earth Engine.
+    </div>
+    <div class="fcol">
+      <b>Metodo</b><br>
+      La temperatura mostrata è quella della superficie, non dell'aria. I valori a 10 metri sono stime calibrate su dati misurati, dichiarate come tali ovunque compaiono.
+    </div>
+  </div>
+</div></footer>
+
+</body>
+</html>
