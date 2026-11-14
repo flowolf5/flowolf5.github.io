@@ -1,0 +1,1 @@
+datiTassello("8_0|terra|primavera",{"celle":[9],"temperatura":"AIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgA==","differenza":"AIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgA==","caso":"00000000000000000000","anni_validi":[1]});

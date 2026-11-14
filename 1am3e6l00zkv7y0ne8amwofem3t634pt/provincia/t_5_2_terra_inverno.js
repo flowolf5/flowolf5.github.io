@@ -1,0 +1,1 @@
+datiTassello("5_2|terra|inverno",{"celle":[99],"temperatura":"3QJyA1kC+gEAgGwDcQPDAgCAsAEsAwCASQNgAhEDygLMAWkD/AMAgA==","differenza":"AACVAHz/Hf8AgI8AlADm/wCA0/5PAACAawCD/zQA7f/v/owAHwEAgA==","caso":"00000000000000000000","anni_validi":[15]});

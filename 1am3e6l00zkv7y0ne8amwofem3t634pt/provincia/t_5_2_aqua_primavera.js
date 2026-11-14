@@ -1,0 +1,1 @@
+datiTassello("5_2|aqua|primavera",{"celle":[99],"temperatura":"xwj/CACAwwkAgGkJ2wcdCR4HtAkYCQCAMQh+CEAIkwkAgDwJ3wj5BwCA","differenza":"AAA5AACA/AAAgKIAFf9WAFj+7gBSAACAav+4/3n/zAAAgHUAGAAy/wCA","caso":"000000000000000000000","anni_validi":[15]});

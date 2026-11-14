@@ -1,0 +1,1 @@
+datiTassello("1_9|terra|estate",{"celle":[50],"temperatura":"pgxzDeYLygswDIwMdwz7DNILdwxVDYwM+As/DdkMdA3IDNEMqgwRDQ==","differenza":"AADNAED/JP+K/+b/0f9VACz/0f+vAOb/U/+ZADMAzgAiACsABABrAA==","caso":"00000000000000000000","anni_validi":[19]});

@@ -1,0 +1,1 @@
+datiTassello("5_2|aqua|estate",{"celle":[99],"temperatura":"5gwYDpAMWAx+DIkNvQwcDewLQwzuDb4MAIDjDK0MIw7+C6MMGQxuDYAN","differenza":"AAAyAar/cv+Y/6IA1/82AAb/Xf8IAdj/AID9/8f/PQEY/7z/M/+HAJoA","caso":"000000000000000000000","anni_validi":[19]});

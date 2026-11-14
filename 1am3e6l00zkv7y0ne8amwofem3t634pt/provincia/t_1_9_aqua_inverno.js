@@ -1,0 +1,1 @@
+datiTassello("1_9|aqua|inverno",{"celle":[50],"temperatura":"+gMAgEgDkAMlA5cEowT9A6QDnQPoA3cDrgR/A08EgAQwA0wEGgSIBJwE","differenza":"AAAAgE//lv8r/54AqQAEAKr/o//u/33/tACF/1UAhgA2/1MAIACOAKIA","caso":"000000000000000000000","anni_validi":[19]});

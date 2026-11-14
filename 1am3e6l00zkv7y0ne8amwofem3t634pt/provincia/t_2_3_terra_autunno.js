@@ -1,0 +1,1 @@
+datiTassello("2_3|terra|autunno",{"celle":[98,99],"temperatura":"LAiTBwCAAIDlB8gIyQj1BygHawhWCFIIgghgB3YIngceCTwI5wd3CN8HPgcAgACAvweoCG8HmQcJB0gIMgj8BwCAYgdkCHUHbQgUCNAHOwg=","differenza":"AABn/wCAAIC5/5wAnQDK//3+PwAqACcAVwA0/0sAcv/yABAAu/9LAAAAXv8AgACA4P/JAJD/uv8q/2kAUwAdAACAg/+FAJb/jgA1APH/XAA=","caso":"0000000000000000000000000000000000000000","anni_validi":[17,16]});

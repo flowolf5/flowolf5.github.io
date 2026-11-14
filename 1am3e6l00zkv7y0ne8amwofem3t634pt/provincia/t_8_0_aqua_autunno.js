@@ -1,0 +1,1 @@
+datiTassello("8_0|aqua|autunno",{"celle":[9],"temperatura":"AIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACA","differenza":"AIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACA","caso":"000000000000000000000","anni_validi":[5]});
