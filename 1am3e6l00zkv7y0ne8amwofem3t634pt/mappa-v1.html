@@ -228,6 +228,20 @@ footer .contenitore{padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (max-width:999px){#dettagli .griglia{display:flex;flex-direction:column}#dettagli .griglia>*{width:auto;min-width:0}body{padding-bottom:0}}
 #dettagli .gruppo-spostato{margin:8px 0}
 .semplice-nascosto{display:none !important}
+.scala72{margin:6px 0}.scala72 .scala-barra{height:16px;border-radius:3px;border:1px solid var(--linea)}
+.tacche72{position:relative;height:20px;font-size:.8rem;color:var(--tenue);margin-top:2px}.tacche72 span{position:absolute;transform:translateX(-50%);top:0;white-space:nowrap}
+.tacche72 span:first-child{transform:none}.tacche72 span:last-child{transform:translateX(-100%)}
+.nd72{display:flex;align-items:center;gap:8px;margin:2px 0;font-size:.85rem}.righe72{display:inline-block;width:28px;height:14px;border:1px solid #6b6b6b;background:repeating-linear-gradient(45deg,#6b6b6b 0 2px,#fff 2px 6px)}
+.scheda72 .et72{display:block;font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;color:var(--tenue);font-weight:700}
+.bl72{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0}.bl72>div{border:1px solid var(--linea);border-radius:8px;padding:8px;min-width:0}
+.bl72 .n72{display:block;font-size:1.9rem;font-weight:800;line-height:1.15}.bl72 .t72{display:block;font-size:.8rem;color:var(--tenue);overflow-wrap:anywhere}
+.bl72 .caldo72{color:#b3261e}.bl72 .freddo72{color:#1f56a8}
+.vic72{margin:6px 0;padding:0;list-style:none}.vic72 li{border-top:1px solid var(--linea);padding:6px 0;font-size:.92rem;overflow-wrap:anywhere}
+#reggio72{margin:12px 0}#reggio72 svg{display:block;width:100%;height:auto}
+#reggio72 .elenco72{margin:6px 0;padding:0;list-style:none}#reggio72 .elenco72 li{border-top:1px solid var(--linea);padding:6px 0;font-size:.92rem;overflow-wrap:anywhere}
+#reggio72 .tenue72{font-size:.85rem;color:var(--tenue);margin:4px 0}
+@media (max-width:480px){.bl72{gap:6px}.bl72>div{padding:6px}.bl72 .n72{font-size:1.6rem}}
+
 .scelta-tipo{display:flex;gap:8px;margin:14px 0 6px}
 .scelta-tipo button{flex:1 1 0;font:inherit;font-size:1.05rem;font-weight:700;min-height:52px;border:2px solid var(--accento);border-radius:12px;background:var(--carta);color:var(--accento);cursor:pointer;padding:6px 10px;line-height:1.2}
 .scelta-tipo button[aria-pressed="true"]{background:var(--accento);color:#fff}
@@ -299,7 +313,7 @@ body.approf-aperta{overflow:hidden}
       <div class="comandi-mappa" role="region" aria-label="Scelte">
         <div class="gruppo"><span id="lab-stagione">Stagione</span><div class="segmenti" id="sel-stagione" role="group" aria-labelledby="lab-stagione"></div></div>
         <div class="gruppo"><span id="lab-sat">Satellite – ora di passaggio in ora solare locale (posizione del Sole, non l'orologio)</span><div class="segmenti" id="sel-satellite" role="group" aria-labelledby="lab-sat"></div></div>
-        <div class="gruppo"><span id="lab-modo">Mappa</span><div class="segmenti" id="sel-modo" role="group" aria-labelledby="lab-modo"></div></div>
+        <div class="gruppo" style="display:none" hidden><span id="lab-modo">Mappa</span><div class="segmenti" id="sel-modo" role="group" aria-labelledby="lab-modo"></div></div>
         <div class="gruppo"><span id="lab-zone">Zone</span><div class="segmenti"><button type="button" id="btn-zone" aria-pressed="true" aria-labelledby="lab-zone btn-zone">Contorni</button></div></div>
         <div class="gruppo gruppo-tempo"><span id="tit-tempo">Barra del tempo</span>
           <div class="barra-tempo">
@@ -380,7 +394,7 @@ body.approf-aperta{overflow:hidden}
     <div class="comandi-prov" role="region" aria-label="Scelte della provincia">
       <div class="gruppo"><span id="lab-prov-stagione">Stagione</span><div class="segmenti" id="prov-stagione" role="group" aria-labelledby="lab-prov-stagione"></div></div>
       <div class="gruppo"><span id="lab-prov-sat">Satellite</span><div class="segmenti" id="prov-sat" role="group" aria-labelledby="lab-prov-sat"></div></div>
-      <div class="gruppo"><span id="lab-prov-modo">Mappa</span><div class="segmenti" id="prov-modo" role="group" aria-labelledby="lab-prov-modo"></div></div>
+      <div class="gruppo" style="display:none" hidden><span id="lab-prov-modo">Mappa</span><div class="segmenti" id="prov-modo" role="group" aria-labelledby="lab-prov-modo"></div></div>
       <div class="gruppo"><span id="lab-prov-anno">Barra del tempo</span>
         <div class="barra-tempo">
           <button type="button" class="bottone" id="prov-btn-media" aria-pressed="true">Media del periodo</button>
@@ -1083,7 +1097,7 @@ function fuoriScala(x, v){
   }
   var lo = scalaDi(v || vistaCorrente())[0], hi = scalaDi(v || vistaCorrente())[1];
   if (x > hi) return '<p class="provenienza fuori-scala"><strong>Oltre il limite della scala</strong> (' + num(hi, 1) + ' °C): sulla mappa ha il colore più scuro, il valore scritto è quello vero.</p>';
-  if (x < lo) return '<p class="provenienza fuori-scala"><strong>Oltre il limite della scala</strong> (' + num(lo, 1) + ' °C): sulla mappa ha il colore più chiaro, il valore scritto è quello vero.</p>';
+  if (x < lo) return '<p class="provenienza fuori-scala"><strong>Oltre il limite della scala</strong> (' + num(lo, 1) + ' °C): sulla mappa ha il colore dell\'estremo freddo (blu intenso), il valore scritto è quello vero.</p>';
   return '';
 }
 function oltre(x, v){
@@ -1179,7 +1193,7 @@ function avvisoStagione(){
   return seg.length ? '<div class="avviso avviso-pannello"><strong>Attenzione – ' + NOMI_ST[stato.stagione].toLowerCase() + ':</strong> ' + seg.map(function(x){ return esc(x.testo); }).join(' ') + ' La mappa di questa stagione è meno affidabile delle altre.</div>' : '';
 }
 var RIGA_AQUA = 'Per Aqua il disegno è quello del mattino: alle 13 i contrasti reali sono probabilmente più forti (deduzione, non misura).';
-var FRASE_SCALA = 'I limiti della scala cambiano solo con la stagione: guarda i numeri agli estremi.';
+var FRASE_SCALA = 'La scala è la stessa per ogni stagione e ogni anno.';
 function scala(pal, a, m, b){
   return '<p class="nota-scala">' + FRASE_SCALA + '</p><div class="scala"><div class="scala-barra" style="background:linear-gradient(to right,' + pal.join(',') + ')"></div>' +
     '<div class="scala-tacche"><span id="det-scala-min">' + a + '</span>' + (m ? '<span>' + m + '</span>' : '') + '<span id="det-scala-max">' + b + '</span></div></div>';
@@ -1200,11 +1214,11 @@ function legendaMappa(v){
   var aqua = v.sat === 'aqua' && c.disegno ? '<p>' + RIGA_AQUA + '</p>' : '';
   var sotto = '<p class="provenienza">' + (v.anno === null ? 'Media del periodo (' + esc(k.modo === 'temperatura' && !k.livello && chiave(v) === chiave(DET.valido_per_v) ? F.periodo : b.periodo) + ')' : 'Anno ' + v.anno) +
     ' · ' + NOMI_ST[v.stagione] + ' · ' + esc(SAT[v.sat]) + ', passaggio verso le ' + b.ora_passaggio.ora_solare_locale + ' (ora solare locale (posizione del Sole, non l\'orologio)).' +
-    (k.modo === 'temperatura' && !k.no ? (k.livello ? ' Livello della cella da circa 1 km: più scuro = più caldo.' : ' Temperatura stimata a circa 100 m: più scuro = più caldo.') : '') + '</p>' +
+    (k.modo === 'temperatura' && !k.no ? (k.livello ? ' Livello della cella da circa 1 km: dal blu (freddo) al rosso scuro (caldo).' : ' Temperatura stimata a circa 100 m: dal blu (freddo) al rosso scuro (caldo).') : '') + '</p>' +
     '<p class="provenienza" id="det-trasp-nota">L\'intensità dei colori cambia l\'aspetto, non i valori: 10% = quasi trasparente, 90% = quasi coprente. ' + (COLORI_ACCESI ? '' : '<strong>Colori spenti</strong>: si vede solo lo sfondo; toccando un punto il pannello mostra comunque valore, zona e misura o stima.') + '</p>';
   if (k.no) return '<div class="legenda-det"><p><strong>Nessun colore in questa vista</strong>: si vede solo lo sfondo Sentinel-2.</p>' + CASI_LEGENDA + prodotti + '</div>' + sotto;
   if (k.modo === 'temperatura') return scala(PAL, num(sc[0], 1) + ' °C o meno', '', num(sc[1], 1) + ' °C o più') +
-    rigaAriaLegenda(v) + '<div class="legenda-det"><p>Più scuro = più caldo: temperatura ' + (k.livello ? (k.aria ? 'della cella stimata dall\'aria' : 'misurata della cella') : 'stimata') + ' del suolo ' + (v.stagione === 'inverno' ? 'd\'inverno' : (v.stagione === 'estate' ? 'd\'estate' : 'in ' + v.stagione)) +
+    rigaAriaLegenda(v) + '<div class="legenda-det"><p>Dal blu (freddo) al rosso scuro (caldo): temperatura ' + (k.livello ? (k.aria ? 'della cella stimata dall\'aria' : 'misurata della cella') : 'stimata') + ' del suolo ' + (v.stagione === 'inverno' ? 'd\'inverno' : (v.stagione === 'estate' ? 'd\'estate' : 'in ' + v.stagione)) +
     (v.anno === null ? '' : ' ' + v.anno) + ', secondo MODIS ' + esc(nomeSat(v.sat)) + ', ore ' + Math.round(ora[0] + ora[1] / 60) + ' circa. Scala di questa stagione e di questo satellite: da ' + num(sc[0], 1) + ' a ' + num(sc[1], 1) + ' °C.</p>' + CASI_LEGENDA + aqua + prodotti + '</div>' + sotto;
   return scala(RDBU, num(-lim, 1, true) + ' °C o meno', '0 = media della finestra', num(lim, 1, true) + ' °C o più') + rigaAriaLegenda(v) +
     '<div class="legenda-det"><p>Rosso = più caldo della media della finestra, blu = più fresco, giallo chiaro = uguale. Differenza della cella misurata' + (k.livello ? '.' : ' più il disegno a circa 100 m.') + '</p>' + CASI_LEGENDA + aqua + prodotti + '</div>' + sotto;
@@ -2167,7 +2181,7 @@ function rigaCampLegenda(v){
 function legendaProv(v){
   var sc = scalaProv(v), lim = limProv(v), b = smDi(v), per = PROV.combinazioni[chiaveProv(v)].periodo;
   var testa = v.modo === 'temperatura' ?
-    scalaSemplice(PAL, num(sc[0], 1) + ' °C o meno', '', num(sc[1], 1) + ' °C o più') + '<p><strong>Media del periodo: temperatura.</strong> Più scuro = più caldo. <strong>La scala di questa mappa è diversa da quella della mappa di Reggio</strong>: va dal 2° al 98° percentile delle medie del periodo di tutte le celle della provincia, montagna compresa, per questa stagione e questo satellite. Le celle oltre gli estremi hanno il colore dell\'estremo.</p>' +
+    scalaSemplice(PAL, num(sc[0], 1) + ' °C o meno', '', num(sc[1], 1) + ' °C o più') + '<p><strong>Media del periodo: temperatura.</strong> Dal blu (freddo) al rosso scuro (caldo). <strong>La scala è la stessa di tutte le mappe</strong>: da −5 a 40 °C.</p>' +
     '<p>' + FRASE_ANNI + '</p>' :
     scalaSemplice(RDBU, num(-lim, 1, true) + ' °C o meno', '0 = media del periodo della cella', num(lim, 1, true) + ' °C o più') + '<p><strong>Anno ' + v.anno + ': differenza dalla media della cella</strong>, cioè il valore dell\'anno meno la media di questa cella su tutti gli anni misurati (' + periodoCella(v) + (annoAria(v) ? '; qui il valore dell\'anno è stimato dall\'aria' : ', anno incluso') + '). <strong>Non è una tendenza</strong>: dice solo com\'è andato quell\'anno rispetto al solito. Rosso = più caldo del solito in quella cella, blu = più fresco, grigio = come il solito. ' + FRASE_PERCHE + '</p>' +
     '<p>' + FRASE_ASSOLUTO + ' Nella finestra di Reggio vale la stessa regola delle altre celle della provincia (nella mappa di Reggio sopra, invece, la differenza è dalla media della finestra). Le celle senza media del periodo hanno una stima (puntino nell\'angolo).</p>' +
@@ -2320,7 +2334,7 @@ function aggiorna(){
     if (k === 'stagione' && STAGIONI.indexOf(v) >= 0) stato.stagione = v;
     if (k === 'sat' && SAT[v]) stato.sat = v;
     if (k === 'anno' && /^[0-9]+$/.test(v)) stato.anno = Number(v);
-    if (k === 'modo' && NOMI_MODO[v]) stato.modo = v;
+    if (k === 'modo' && v === 'temperatura') stato.modo = v;
     if (k === 'zone' && v === '0') stato.zone = false;
     if (k === 'scheda' && v === '1') stato.schedaAperta = true;
     if (k === 'punto' && /^[0-9]+,[0-9]+$/.test(v)) stato.sel = v.split(',').map(Number);
@@ -2425,8 +2439,8 @@ var S61 = {};
     var r;
     $('semplice-intensita').classList.toggle('semplice-nascosto', p);
     var c65 = mappaC(), inv65 = stato.stagione === 'inverno' ? ' D\'inverno le differenze nel territorio sono piccole: pochi colori diversi.' : '';
-    if (p) r = c65 ? 'Azzurro vuol dire più fresco di zone simili (stessa fascia e quota), terracotta più caldo.' : 'Più scuro vuol dire più caldo. I limiti della scala sono fissi per la stagione.' + inv65;
-    else r = c65 ? 'Azzurro vuol dire più fresco della media della zona mostrata, terracotta più caldo.' : 'Più scuro vuol dire più caldo. A 100 m i valori sono stime: mostrano il disegno, non il valore preciso.' + inv65;
+    if (p) r = c65 ? 'Azzurro vuol dire più fresco di zone simili (stessa fascia e quota), terracotta più caldo.' : 'Dal blu (freddo) al rosso scuro (caldo). La scala è la stessa per ogni stagione e ogni anno, da −5 a 40 °C.' + inv65;
+    else r = c65 ? 'Azzurro vuol dire più fresco della media della zona mostrata, terracotta più caldo.' : 'Dal blu (freddo) al rosso scuro (caldo). A 100 m i valori sono stime: mostrano il disegno, non il valore preciso.' + inv65;
     if (annoSenzaSuolo(vistaCorrente())) r = 'Nessun colore: per questo anno non c\'è il dato del suolo.';
     if ($('semplice-riga').textContent !== r) $('semplice-riga').textContent = r;
     var NA = typeof NOTE_ANNI65 !== 'undefined' ? NOTE_ANNI65 : {}, nk = stato.anno === null ? null : stato.stagione + '|' + stato.anno, nt = nk && NA[nk], ne = $('nota-anno65'), hh = nt ? esc(nt) + ' <a href="metodo.html#fonti-anni">Fonti</a>' : '';
@@ -3178,10 +3192,9 @@ function legendaMappa(v){
     '<p class="provenienza" id="det-trasp-nota">L\'intensità dei colori cambia l\'aspetto, non i valori: 10% = quasi trasparente, 90% = quasi coprente. ' + (COLORI_ACCESI ? '' : '<strong>Colori spenti</strong>: si vede solo lo sfondo; toccando un punto il pannello mostra comunque valore, zona e misura o stima.') + '</p>';
   if (k.no) return '<div class="legenda-det"><p><strong>Nessun colore in questa vista</strong>: si vede solo lo sfondo Sentinel-2.</p>' + casi + prodotti + '</div>' + sotto;
   if (k.modo === 'temperatura') { var t = tacche65(sc);
-    return scala(PAL, t[0], t[1], t[2]) + rigaAriaLegenda(v) + '<div class="legenda-det"><p><strong>Quanto è caldo.</strong> Più scuro = più caldo: temperatura ' + (k.livello ? (k.aria ? 'della cella stimata dall\'aria' : 'misurata della cella') : 'stimata') +
+    return scala(PAL, t[0], t[1], t[2]) + rigaAriaLegenda(v) + '<div class="legenda-det"><p><strong>Quanto è caldo.</strong> Dal blu (freddo) al rosso scuro (caldo): temperatura ' + (k.livello ? (k.aria ? 'della cella stimata dall\'aria' : 'misurata della cella') : 'stimata') +
       ' del suolo ' + (v.stagione === 'inverno' ? 'd\'inverno' : (v.stagione === 'estate' ? 'd\'estate' : 'in ' + v.stagione)) + (v.anno === null ? ' (media del periodo)' : ' ' + v.anno) + ', secondo MODIS ' + esc(nomeSat(v.sat)) +
-      ', ore ' + Math.round(ora[0] + ora[1] / 60) + ' circa. <strong>Limiti fissi per ' + (v.stagione === 'inverno' ? 'l\'inverno' : (v.stagione === 'estate' ? 'l\'estate' : (v.stagione === 'autunno' ? 'l\'autunno' : 'la primavera'))) + ': da ' + num(sc[0], 0) + ' a ' + num(sc[1], 0) +
-      ' °C</strong>, uguali per i due satelliti, per la media del periodo e per ogni anno, e uguali alla mappa della provincia: così i colori si possono confrontare. Oltre i limiti, il colore dell\'estremo.</p>' +
+      ', ore ' + Math.round(ora[0] + ora[1] / 60) + ' circa. <strong>Scala unica da −5 a 40 °C</strong>, uguale per aria e suolo, per ogni stagione e per ogni anno: così i colori si possono confrontare. Sotto −5 e sopra 40 °C il colore dell\'estremo.</p>' +
       inverno65(v) + leggere65(false) + casi + aqua + prodotti + '</div>' + sotto; }
   return scala(RDBU, '−3 °C o meno', '0 = come la media della zona', '+3 °C o più') + rigaAriaLegenda(v) +
     '<div class="legenda-det"><p><strong>Più fresco o più caldo di zone simili.</strong> Nella mappa di Reggio ogni punto è confrontato con la media della zona mostrata, che è tutta in pianura: in pianura la quota cambia poco la temperatura del suolo. ' +
@@ -3208,8 +3221,8 @@ function legendaProv(v){
   var nst = v.stagione === 'inverno' ? 'l\'inverno' : (v.stagione === 'estate' ? 'l\'estate' : (v.stagione === 'autunno' ? 'l\'autunno' : 'la primavera'));
   var vi_ = vista65(v), pend = function(f){ return num(Math.abs((quotaOk65(A, vi_, f) ? A.bn[f] : A.b[f]) || 0) * 100, 1); };
   var testa = !mappaC() ?
-    scalaSemplice(PAL, t[0], t[1], t[2]) + '<p><strong>Quanto è caldo</strong> (' + quando + '): temperatura del suolo all\'ora del passaggio del satellite. Più scuro = più caldo. ' +
-      '<strong>Limiti fissi per ' + nst + ': da ' + num(sc[0], 0) + ' a ' + num(sc[1], 0) + ' °C</strong>, uguali per i due satelliti, per la media del periodo e per ogni anno, e uguali alla mappa di Reggio: così i colori si possono confrontare. Oltre i limiti, il colore dell\'estremo.</p>' + inverno65(v) :
+    scalaSemplice(PAL, t[0], t[1], t[2]) + '<p><strong>Quanto è caldo</strong> (' + quando + '): temperatura del suolo all\'ora del passaggio del satellite. Dal blu (freddo) al rosso scuro (caldo). ' +
+      '<strong>Scala unica da −5 a 40 °C</strong>, uguale per aria e suolo, per ogni stagione e per ogni anno: così i colori si possono confrontare. Sotto −5 e sopra 40 °C il colore dell\'estremo.</p>' + inverno65(v) :
     scalaSemplice(RDBU, '−3 °C o meno', '0 = come zone simili', '+3 °C o più') + '<p><strong>Più fresco o più caldo di zone simili</strong> (' + quando + '): ogni cella è confrontata con il valore atteso per celle simili, nello stesso momento. ' +
       '<strong>Po e pianura</strong>: il valore atteso è la media della fascia, perché lì la quota cambia poco la temperatura del suolo. ' +
       '<strong>Collina e montagna</strong>: il valore atteso è quello alla quota della cella, dentro la sua fascia, perché salendo il suolo è più fresco ' +
@@ -3486,13 +3499,14 @@ function disegna69(){
   var t = tacche65(sc);
   var p = [];
   if (!C) p.push('<p><strong>Aria a 2 m: temperatura media giornaliera, (massima + minima) / 2, stimata.</strong> È una stima, non una misura: l\'errore è scritto toccando un punto. Nove volte su dieci l\'errore della media non supera, in °C: ' + esc(erroriFasce69(s, anno)) + '. ' +
-    '<strong>Limiti fissi per ' + (s === 'inverno' ? 'l\'inverno' : s === 'estate' ? 'l\'estate' : s === 'autunno' ? 'l\'autunno' : 'la primavera') + ': da ' + num(sc[0], 0) + ' a ' + num(sc[1], 0) + ' °C</strong>, uguali per ogni anno e per la media del periodo. Oltre i limiti, il colore dell\'estremo.</p>');
+    '<strong>Scala unica da −5 a 40 °C</strong>, uguale per aria e suolo, per ogni stagione e per ogni anno: così i colori si possono confrontare. Sotto −5 e sopra 40 °C il colore dell\'estremo.</p>');
   else p.push('<p><strong>Più fresco o più caldo di zone simili.</strong> Ogni cella è confrontata con la retta fra temperatura dell\'aria e quota fatta con le centraline ARPAE di quel periodo: terracotta = più caldo della retta, azzurro = più fresco. <strong>Limiti fissi: da −2 a +2 °C.</strong> ' +
     '<strong>Differenze sotto circa 1 °C non sono distinguibili</strong>: sono più piccole dell\'errore della stima. Per la minima, nella scheda, il confronto è con la media della fascia (limiti ±3 °C), perché la quota non basta a spiegarla. Non è una tendenza.</p>');
   if (C && !rettaDi69(s, anno)) p.push('<p class="po">Prima del 2006 non ci sono centraline: il confronto con la retta delle centraline non c\'è. Scegli un anno dal 2006.</p>');
   if (anno !== null && anno <= 2005) p.push('<p class="po"><strong>' + anno + ': senza centraline.</strong> Nel nostro archivio le centraline ARPAE partono dal 2006. Qui i valori vengono da Eraclito 91 (ARPAE), corretto per la quota e per la sua distorsione media. Non li possiamo controllare con le centraline: l\'errore scritto è quello degli anni dopo il 2006 e può essere troppo ottimistico.</p>');
   if (anno === 2026) p.push('<p class="po"><strong>2026: provvisorio.</strong> L\'anno non è finito' + (s === 'autunno' ? ': l\'autunno ha i dati fino al 15 novembre' : '') + '. I numeri possono cambiare.</p>');
-  p.push('<p class="po"><strong>Zona del Po: stima non validata.</strong> In questa fascia non c\'è nessuna centralina. L\'errore scritto è quello della pianura.</p>');
+  p.push('<p class="po"><strong>Zona del Po: stima non validata.</strong> In questa fascia non c\'è nessuna centralina. L\'errore della media è quello della pianura; l\'errore del picco non è noto.</p>');
+  p.push('<p><strong>In pianura la mappa sembra uniforme.</strong> In pianura l\'aria varia meno dell\'errore (poco più di 0,7 °C contro ± 0,9 °C): per questo, qui, la mappa sembra quasi uniforme. Non è un difetto della scala: i dati sono così.</p>');
   p.push('<p>Fonti: centraline ARPAE e Eraclito 91 (ARPAE, CC BY 4.0), ERA5-Land, MODIS, quota e copertura del suolo. Licenze, numeri e limiti sono nel <a href="metodo.html#aria-2m">metodo</a>.</p>');
   g69('aria-legenda').innerHTML = p.join('');
   stato69(); riga69(); carta69();
@@ -3513,7 +3527,7 @@ function riga69(){
   var d = g69('semplice-scala'), sc = A69.base ? A69.base.scale[stato.stagione].scala : null;
   if (sc) { var t = tacche65(sc), h = mappaC() ? scalaSemplice(RDBU, '−2 °C o meno', '0 = come zone simili', '+2 °C o più') : scalaSemplice(PAL, t[0], t[1], t[2]); if (d.innerHTML !== h) d.innerHTML = h; }
   var r = mappaC() ? 'Azzurro vuol dire più fresco di zone simili alla stessa quota, terracotta più caldo. Differenze sotto circa 1 °C non si distinguono.' :
-    'Più scuro vuol dire più caldo. I limiti della scala sono fissi per la stagione. Il numero e l\'errore sono nella scheda del punto.';
+    'Dal blu (freddo) al rosso scuro (caldo). La scala è la stessa per ogni stagione e ogni anno, da −5 a 40 °C. Il numero e l\'errore sono nella scheda del punto.';
   if (g69('semplice-riga').textContent !== r) g69('semplice-riga').textContent = r;
   var nk = stato.anno === null ? null : stato.stagione + '|' + stato.anno, nt = nk && NOTE_ANNI_ARIA[nk], ne = g69('nota-anno65'), hh = nt ? esc(nt) + ' <a href="metodo.html#fonti-anni">Fonti</a>' : '';
   if (ne.innerHTML !== hh) { ne.innerHTML = hh; ne.hidden = !nt; }
@@ -3578,6 +3592,221 @@ function carta69(){
   var ai = g69('area-intorno'); if (ai) ai.hidden = true;
 }
 // ===== fine report 69 =====
+
+
+// ===== passo 17: palette V2 assoluta, scheda C, prima contro adesso, picchi, vista Reggio (prova_passo17_v1.py) =====
+var LUT72 = ["#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1b1464", "#1c1769", "#1d1b6f", "#1f1e74", "#202279", "#21257f", "#222884", "#232c8a", "#242f8f", "#253395", "#26369a", "#2739a0", "#283da6", "#2940ac", "#2944b1", "#2a47b7", "#2b4bbd", "#3154c1", "#375ec5", "#3c67c9", "#4070ce", "#447ad2", "#4883d6", "#4b8dda", "#4e96de", "#559ee0", "#60a3e1", "#6aa9e2", "#73aee3", "#7cb4e4", "#84bae5", "#8cbfe6", "#94c5e7", "#9ccbe8", "#f2e194", "#f3e08c", "#f4df83", "#f5de7b", "#f6dd72", "#f7db65", "#f7da58", "#f7d84a", "#f8cf44", "#f8c73d", "#f9be36", "#f9b530", "#f9ac29", "#f8a324", "#f79823", "#f68d21", "#f48220", "#f2761e", "#f06a1d", "#ee651d", "#ec611d", "#ea5c1e", "#e8571e", "#e6521e", "#e44d1e", "#e2471e", "#e0411e", "#dd3b1e", "#db351e", "#d92e1e", "#d7261e", "#d32422", "#ce2225", "#c92028", "#c51e2b", "#c01c2e", "#bc1b31", "#b71934", "#b31736", "#ae1539", "#aa133b", "#a4123b", "#9d1139", "#961037", "#8f0f35", "#890e33", "#820d31", "#7b0c2f", "#750b2d", "#6e0a2b", "#670a28", "#600925", "#590921", "#52081e", "#4b071b", "#440717", "#3d0614", "#3d0614", "#3d0614", "#3d0614", "#3d0614", "#3d0614", "#3d0614", "#3d0614", "#3d0614"], LUTRGB72 = LUT72.map(hex2rgb), ERR_PICCHI72 = {"tx": {"inverno": {"rmse": 1.56, "p90_abs": 2.46}, "primavera": {"rmse": 0.96, "p90_abs": 1.54}, "estate": {"rmse": 0.98, "p90_abs": 1.54}, "autunno": {"rmse": 1.1, "p90_abs": 1.82}, "tutte": {"n": 4108, "bias": 0.05, "rmse": 1.17, "mae": 0.86, "p90_abs": 1.84}}};
+var STAGIONI72 = ["inverno", "primavera", "estate", "autunno"];
+// colore: scala assoluta unica, da -5 a 40 °C, uguale per aria e suolo, stagioni e anni; l'argomento dei limiti si ignora
+coloreDet = function(v, s){ var i = Math.round((v + 12) / 0.5); i = Math.max(0, Math.min(LUTRGB72.length - 1, i)); return LUTRGB72[i]; };
+scalaDi = function(){ return [-5, 40]; }; scalaProv = function(){ return [-5, 40]; };
+(function(){
+  var st = []; for (var t = -5; t <= 40.01; t += 0.5) st.push(LUT72[Math.round((t + 12) / 0.5)] + ' ' + ((t + 5) / 45 * 100).toFixed(2) + '%'); PAL = st;
+})();
+function scala72(){
+  var tk = ''; for (var t = -5; t <= 40; t += 5) tk += '<span style="left:' + ((t + 5) / 45 * 100).toFixed(2) + '%">' + (t < 0 ? '−' + (-t) : t) + '</span>';
+  return '<div class="scala scala72"><div class="scala-barra" style="background:linear-gradient(to right,' + PAL.join(',') + ')"></div><div class="tacche72" aria-hidden="true">' + tk + '</div>' +
+    '<p style="margin:2px 0">Gradi centigradi (°C). Sotto −5 e sopra 40 °C il colore resta quello dell\'estremo.</p>' +
+    '<p class="nd72"><span class="righe72"></span> Righe: nessun dato.</p></div>';
+}
+var scalaSempliceO72 = scalaSemplice, scalaO72 = scala;
+scalaSemplice = function(pal, a, m, b){ return pal === PAL ? scala72() : scalaSempliceO72(pal, a, m, b); };
+scala = function(pal, a, m, b){ return pal === PAL ? scala72() : scalaO72(pal, a, m, b); };
+// righe = nessun dato, nella mappa del suolo della provincia
+(function(){
+  var o = immagineProv;
+  immagineProv = function(v){
+    var r = o(v);
+    try {
+      if (PV.svg && v.modo === 'temperatura') {
+        var d = '', c; for (var i = 0; i < PH; i++) for (var j = 0; j < PW; j++) { c = cellaProv(v, i, j); if (c.s === 'ok' && c.x === null) d += 'M' + (j * PR).toFixed(2) + ' ' + i + 'h' + PR + 'v1h-' + PR + 'z'; }
+        var p = PV.svg.querySelector('#nodato72');
+        if (!p) {
+          var df = sv('defs', {}), pt = sv('pattern', {id:'righe72', width:0.3, height:0.3, patternUnits:'userSpaceOnUse', patternTransform:'rotate(45)'});
+          pt.appendChild(sv('rect', {width:0.3, height:0.3, fill:'#fff', 'fill-opacity':0.55})); pt.appendChild(sv('rect', {width:0.07, height:0.3, fill:'#6b6b6b'})); df.appendChild(pt); PV.svg.appendChild(df);
+          p = sv('path', {id:'nodato72', d:'', fill:'url(#righe72)', 'pointer-events':'none'}); PV.svg.appendChild(p);
+        }
+        p.setAttribute('d', d); PV.svg.setAttribute('data-nodato', (d.match(/M/g) || []).length);
+      }
+    } catch (e) { if (window.console) console.error(e); }
+    return r;
+  };
+})();
+// ---------- picchi (dati per stagione, caricati solo quando servono)
+var P72 = {S:{}, caricando:{}};
+window.datiAriaP = function(s, d){ P72.S[s] = {anni0:d.anni0, est:u8_69(d.est), mis:d.mis}; if (A69.tipo === 'aria') { carta69(); reggio72(); } };
+function caricaP72(s){ if (P72.S[s] || P72.caricando[s]) return; P72.caricando[s] = 1; caricaScript('aria/picchi_' + s + '.js'); }
+var MESI72 = ['', 'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+function giorno72(md, s, anno){ var m = Number(md.substr(0, 2)), g = Number(md.substr(2, 2)); return g + ' ' + MESI72[m] + (s === 'inverno' ? ' ' + (m === 12 ? anno - 1 : anno) : ''); }
+function colCss72(rgb){ return 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')'; }
+function vicine72(s, anno, i, j, maxKm){
+  var P = P72.S[s]; if (!P || anno === null) return [];
+  var ll = centro69(i, j), out = [];
+  P.mis.forEach(function(r){
+    if (r[1] !== anno) return;
+    var z = A69.stz[r[0]], d = distKm69(ll[0], ll[1], z.lat, z.lon);
+    if (d <= maxKm) out.push({z:z, d:d, pmax:r[2], dmax:r[3], pmin:r[4], dmin:r[5], media:r[6]});
+  });
+  return out.sort(function(a, b){ return a.d - b.d; });
+}
+function stimaPiccoCaldo72(s, anno, k){
+  var P = P72.S[s]; if (!P || anno === null || anno < 2006 || anno > 2025) return null;
+  var e = P.est[(anno - P.anni0) * A69.base.n_celle + k]; if (e === 255) return null;
+  var v = valori69(s, anno, k); return v ? v[0] + e / 10 : null;
+}
+// ---------- prima contro adesso (media 2003-2012 contro 2016-2025), per la cella e la stagione scelte
+function primaAdesso72(s, k){
+  var pr = [], ad = [], y, v;
+  for (y = 2003; y <= 2012; y++) { v = valori69(s, y, k); if (!v) return null; pr.push((v[0] + v[1]) / 2); }
+  for (y = 2016; y <= 2025; y++) { v = valori69(s, y, k); if (!v) return null; ad.push((v[0] + v[1]) / 2); }
+  function m(a){ return a.reduce(function(p, q){ return p + q; }, 0) / a.length; }
+  function va(a){ var mm = m(a); return a.reduce(function(p, q){ return p + (q - mm) * (q - mm); }, 0) / (a.length - 1); }
+  var a = m(pr), b = m(ad), se = Math.sqrt(va(pr) / pr.length + va(ad) / ad.length);
+  return {pri:a, ade:b, dif:b - a, se:se};
+}
+function nomeStag72(s){ return {inverno:'dell\'inverno', primavera:'della primavera', estate:'dell\'estate', autunno:'dell\'autunno'}[s]; }
+// ---------- scheda del punto, proposta C: tre blocchi
+carta69 = function(){
+  var box = g69('scheda-semplice-testo'); if (!box || A69.tipo !== 'aria') return;
+  if (!A69.pronta || !A69.sel) return;
+  var s = stato.stagione, anno = stato.anno, i = A69.sel[0], j = A69.sel[1], h = [];
+  // scheda «leggera» all'ingresso (media del periodo, nessun tocco): non carica i dati degli anni e dei picchi, per tenere la prima apertura sotto 1,2 MB
+  var leggero = !(A69.toccato || anno !== null);
+  if (!leggero) caricaP72(s);
+  if (!servono69(s, anno) || (!leggero && !A69.A[s])) { if (!leggero && !A69.A[s]) carica69('a', s); var t0 = '<p>Sto caricando i dati dell\'aria…</p>'; if (box.innerHTML !== t0) box.innerHTML = t0; return; }
+  var k = A69.kOf[i * PW + j];
+  if (k < 0) { var t1 = '<p>Qui non ci sono dati: la mappa copre solo la provincia.</p>'; if (box.innerHTML !== t1) box.innerHTML = t1; return; }
+  var API = window.S61API, ll = centro69(i, j), fas = nomeFascia69(fasciaProv(i, j));
+  var v = valori69(s, anno, k), tx = v[0], tn = v[1], tm = (tx + tn) / 2;
+  var eM = errore69(s, anno, fas, 'media'), eX = errore69(s, anno, fas, 'tx'), eN = errore69(s, anno, fas, 'tn'), era = anno !== null && anno < 2026;
+  var titolo = (anno === null ? NOMI_QUANDO69[s].replace('In ', '').replace(/^./, function(c){ return c.toUpperCase(); }) + ', media 2006-2025' : NELL69[s].replace('Nell\'', '').replace('Nella ', '').replace(/^./, function(c){ return c.toUpperCase(); }) + ' ' + anno) + ' · aria a 2 m';
+  if (API && A69.toccato) {
+    var okL = API.caricaLuoghi(), r = okL ? API.dove(ll[1], ll[0], 500) : null;
+    h.push('<p><strong>Dove sei.</strong> ' + esc(API.frasiDove(r, true).join(' ')) + '</p>');
+    if (!okL && A69.luoghiOk < 6) { A69.luoghiOk++; setTimeout(function(){ if (A69.tipo === 'aria') carta69(); }, 1500); }
+  }
+  // picchi
+  var vic = leggero ? [] : vicine72(s, anno, i, j, 10), pcal = null, pfre = null;
+  vic.forEach(function(x){ if (!pcal && x.pmax !== null) pcal = x; if (!pfre && x.pmin !== null) pfre = x; });
+  var sx = leggero ? null : stimaPiccoCaldo72(s, anno, k), ev = ERR_PICCHI72.tx[s];
+  var bCal, bFre, tCal, tFre;
+  if (anno === null) { bCal = bFre = '—'; tCal = tFre = leggero ? 'tocca un punto o scegli un anno' : 'scegli un anno'; }
+  else if (anno <= 2005) { bCal = bFre = '—'; tCal = tFre = 'prima del 2006 niente picchi'; }
+  else if (anno === 2026) { bCal = pcal ? n1_69(pcal.pmax) + '°' : '—'; tCal = pcal ? 'misurato, anno in corso' : 'anno in corso'; bFre = pfre ? n1_69(pfre.pmin) + '°' : '—'; tFre = pfre ? 'misurato, anno in corso' : 'anno in corso'; }
+  else {
+    if (pcal) { bCal = n1_69(pcal.pmax) + '°'; tCal = giorno72(pcal.dmax, s, anno) + ' · misurato a ' + distTesto69(pcal.d); }
+    else if (sx !== null) { bCal = '≈ ' + n1_69(sx) + '°'; tCal = fas === 'Po' ? 'errore non noto · stima non validata, zona del Po' : 'stima, ± ' + n1_69(ev.rmse); }
+    else { bCal = '—'; tCal = 'nessuna stima qui'; }
+    if (pfre) { bFre = n1_69(pfre.pmin) + '°'; tFre = giorno72(pfre.dmin, s, anno) + ' · misurato a ' + distTesto69(pfre.d); }
+    else { bFre = '—'; tFre = 'nessuna centralina entro 10 km: non si stima'; }
+  }
+  h.push('<div class="scheda72"><span class="et72">' + esc(titolo) + '</span><div class="bl72">' +
+    '<div><span class="et72">Media</span><span class="n72" style="border-bottom:6px solid ' + colCss72(coloreDet(tm)) + '">' + n1_69(tm) + '°</span><span class="t72">stima, ± ' + n1_69(eM) + '</span></div>' +
+    '<div><span class="et72 caldo72">Picco caldo</span><span class="n72 caldo72">' + bCal + '</span><span class="t72">' + tCal + '</span></div>' +
+    '<div><span class="et72 freddo72">Picco freddo</span><span class="n72 freddo72">' + bFre + '</span><span class="t72">' + tFre + '</span></div></div></div>');
+  h.push('<p>' + quando69(s, anno) + ', qui la temperatura media dell\'aria ' + (era ? 'è stata' : 'è') + ' di ' + num(tm, 1) + ' °C (stima, ± ' + num(eM, 1) + ' °C: nove volte su dieci l\'errore è più piccolo). ' +
+    'La massima è circa ' + num(tx, 1) + ' °C (± ' + num(eX, 1) + '), la minima circa ' + num(tn, 1) + ' °C (± ' + num(eN, 1) + ').</p>');
+  // centraline vicine con il picco misurato (entro 10 km)
+  if (vic.length) {
+    h.push('<p><strong>Centraline entro 10 km, ' + (s === 'inverno' ? 'inverno ' : '') + anno + ':</strong></p><ul class="vic72">' + vic.slice(0, 3).map(function(x){
+      return '<li>«' + esc(x.z.nome) + '», a ' + distTesto69(x.d) + ', quota ' + x.z.z + ' m. ' + (x.pmax !== null ? 'Giorno più caldo ' + n1_69(x.pmax) + ' °C il ' + giorno72(x.dmax, s, anno) + '. ' : '') + (x.pmin !== null ? 'Notte più fredda ' + n1_69(x.pmin) + ' °C il ' + giorno72(x.dmin, s, anno) + '.' : '') + '</li>'; }).join('') + '</ul>');
+  }
+  if (anno !== null && anno >= 2006 && anno <= 2025 && sx !== null) h.push(fas === 'Po' ? '<p class="aria-nota">Picco caldo stimato per questa cella: circa ' + n1_69(sx) + ' °C, <strong>errore non noto</strong>. <strong>Zona del Po: stima non validata</strong>, qui non ci sono centraline per controllarla. Il picco freddo non si stima: si mostra solo se c\'è una centralina entro 10 km.</p>' : '<p class="aria-nota">Picco caldo stimato per questa cella: circa ' + n1_69(sx) + ' °C, ± ' + n1_69(ev.rmse) + ' (nove volte su dieci l\'errore è più piccolo di ' + n1_69(ev.p90_abs) + '). Vale dal 2006. Il picco freddo non si stima: si mostra solo se c\'è una centralina entro 10 km.</p>');
+  if (anno !== null && anno >= 2006 && (vic.length || pcal || pfre || sx !== null)) h.push('<p class="aria-nota">Giorni e valori misurati: © Arpae Emilia-Romagna (CC BY 4.0), elaborati dal progetto. Le stime sono calcoli del progetto.</p>');
+  // prima contro adesso
+  var pa = leggero ? null : primaAdesso72(s, k);
+  if (pa) {
+    var segn = Math.abs(pa.dif) >= 2 * pa.se;
+    h.push('<p><strong>Prima contro adesso (' + esc(s) + '): ' + num(Math.round(pa.dif * 10) / 10, 1, true) + ' °C.</strong> Media 2003-2012: ' + num(pa.pri, 1) + ' °C. Media 2016-2025: ' + num(pa.ade, 1) + ' °C. ' +
+      'Errore dovuto agli anni: ± ' + num(pa.se, 1) + ' °C. ' + (segn ? 'La differenza è più grande dell\'errore.' : 'La differenza non si distingue dal caso.') + '</p>' +
+      '<p class="aria-nota">Il periodo «prima» include il 2003-2005, senza centraline (altro metodo, vedi il <a href="metodo.html#prima-adesso">metodo</a>). Nei grafici delle anomalie il riferimento è 1991-2010.</p>');
+  }
+  var o = origine69(s, anno, i, j), org;
+  if (fas === 'Po') org = '<p><strong>Zona del Po: stima non validata.</strong> In questa fascia non c\'è nessuna centralina, quindi non possiamo controllare l\'errore. L\'errore della media è quello della pianura; l\'errore del picco non è noto.</p>';
+  else if (anno !== null && anno <= 2005) org = '<p><strong>Da dove viene.</strong> Prima del 2006 non abbiamo le centraline: il valore viene da Eraclito 91 (ARPAE), corretto per la quota. Non si può controllare con le centraline; l\'errore scritto può essere troppo ottimistico.</p>';
+  else { var wm = A69.S[s].wm[k], vc = o.vicina; org = '<p><strong>Da dove viene la media.</strong> La massima viene dalle centraline ARPAE' + (vc ? ': la più vicina è «' + esc(vc.z.nome) + '», a ' + distTesto69(vc.d) + '; ne usiamo fino a 5, entro 60 km' : '') + '. La minima unisce le centraline e un modello: il modello pesa circa il ' + wm + '%.</p>'; }
+  h.push(org);
+  if (anno === 2026) h.push('<p class="aria-nota"><strong>2026: provvisorio.</strong> L\'anno non è finito' + (s === 'autunno' ? ' (autunno: dati fino al 15 novembre, quindi non confrontabile con gli altri autunni, che arrivano a fine novembre)' : '') + '.</p>');
+  var su = suolo69(s, anno, i, j), ora = D.suolo_mappa.sensori.terra.stagioni[s].ora_passaggio.ora_solare_locale.split(':').map(Number), oraT = ora[0] + (ora[1] >= 30 ? 1 : 0);
+  if (su.attesa) h.push('<p class="aria-nota">Sto caricando il suolo di questo punto…</p>');
+  else if (su.x === null || su.x === undefined) h.push('<p class="aria-nota"><strong>Suolo.</strong> ' + (su.daAria ? 'Per questo anno il satellite non ha una misura di questa cella e non la stimiamo dall\'aria, per non confondere suolo e aria.' : 'In questa vista il satellite non ha un valore per questa cella.') + '</p>');
+  else {
+    h.push('<p class="aria-nota"><strong>Suolo, in secondo piano.</strong> Visto dal satellite nei giorni sereni, verso le ' + oraT + ', il suolo è in media a ' + num(Math.round(su.x), 0) + ' °C' + (su.stima ? ' (una stima, non una misura)' : '') + '. Non è la temperatura dell\'aria: di giorno il suolo al sole è più caldo dell\'aria' + (s === 'inverno' ? ', e con la neve può essere molto più freddo' : '') + '.</p>');
+    if (s === 'inverno' && (anno === 2010 || anno === 2013)) h.push('<p class="aria-nota">' + esc(TXT69['neve' + anno]) + ' <a href="metodo.html#neve-suolo-aria">Come l\'abbiamo misurato</a>.</p>');
+  }
+  h.push('<p><a href="metodo.html#aria-2m">Come è stimata l\'aria</a> · <a href="metodo.html#picchi">Come sono i picchi</a></p>');
+  var html = h.join('');
+  if (box.innerHTML !== html) box.innerHTML = html;
+  var bt = g69('btn-approf-punto'); if (bt) bt.hidden = true;
+  var ai = g69('area-intorno'); if (ai) ai.hidden = true;
+};
+// ---------- vista Reggio per l'aria: 816 celle intorno alla centralina urbana, centraline con il valore misurato, serie storica
+var REG72 = {i0:40, j0:61, ri:12, rj:17, on:false};
+function reggioCreato72(){
+  if (g69('reggio72')) return;
+  var c = document.createElement('section'); c.id = 'reggio72'; c.className = 'ordine-4'; c.setAttribute('aria-labelledby', 'tit-reggio72');
+  var lg = g69('aria-legenda'); lg.parentNode.insertBefore(c, lg);
+}
+function reggio72(){
+  if (A69.tipo !== 'aria' || !A69.pronta) return;
+  reggioCreato72();
+  var c = g69('reggio72'), s = stato.stagione, anno = stato.anno;
+  if (!(anno !== null || REG72.on)) { c.innerHTML = '<h3 id="tit-reggio72">Reggio, l\'aria in dettaglio</h3><p>Mappa delle celle intorno a Reggio, centraline e serie storica. Servono altri dati (circa 0,5 MB).</p><button type="button" id="reggio72-btn" class="bottone">Mostra Reggio in dettaglio</button>'; g69('reggio72-btn').addEventListener('click', function(){ REG72.on = true; reggio72(); }); return; }
+  caricaP72(s); if (!A69.A[s]) { carica69('a', s); }
+  if (!servono69(s, anno) || !A69.A[s]) { c.innerHTML = '<h3 id="tit-reggio72">Reggio, l\'aria in dettaglio</h3><p>Sto caricando i dati…</p>'; return; }
+  var i0 = REG72.i0, j0 = REG72.j0, W = (2 * REG72.rj + 2) * PR, H = 2 * REG72.ri + 2, sv_ = [], n = 0, vmin = 99, vmax = -99;
+  var kc = A69.kOf[i0 * PW + j0];
+  sv_.push('<svg viewBox="0 0 ' + W.toFixed(2) + ' ' + H + '" role="img" aria-label="Mappa di Reggio per l\'aria: celle da circa 1 km e centraline"><defs><pattern id="nd72b" width="0.3" height="0.3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="0.3" height="0.3" fill="#fff"/><rect width="0.07" height="0.3" fill="#6b6b6b"/></pattern></defs>');
+  for (var a = -REG72.ri; a < REG72.ri; a++) for (var b = -REG72.rj; b < REG72.rj; b++) {
+    var ii = i0 + a, jj = j0 + b, k = A69.kOf[ii * PW + jj], vv = k >= 0 ? valori69(s, anno, k) : null, fill;
+    if (vv) { var tm = (vv[0] + vv[1]) / 2; fill = colCss72(coloreDet(tm)); n++; vmin = Math.min(vmin, tm); vmax = Math.max(vmax, tm); } else fill = 'url(#nd72b)';
+    sv_.push('<rect x="' + ((b + REG72.rj) * PR).toFixed(3) + '" y="' + (a + REG72.ri) + '" width="' + PR + '" height="1" fill="' + fill + '" stroke="#fff" stroke-width="0.03"/>');
+  }
+  sv_.push('<rect x="' + (REG72.rj * PR).toFixed(3) + '" y="' + REG72.ri + '" width="' + PR + '" height="1" fill="none" stroke="#1c2530" stroke-width="0.12"/>');
+  // centraline dentro la finestra, con il valore misurato della stagione e dell'anno scelti
+  var P = P72.S[s], elenco = [], lat0 = PG.lat_angolo_alto_sinistra, lon0 = PG.lon_angolo_alto_sinistra, pg = PG.passo_gradi;
+  A69.stz.forEach(function(z, q){
+    var ri = (lat0 - z.lat) / pg - i0, rj = (z.lon - lon0) / pg - j0;
+    if (ri < -REG72.ri || ri > REG72.ri || rj < -REG72.rj || rj > REG72.rj) return;
+    var m = null; if (P && anno !== null) P.mis.forEach(function(r){ if (r[0] === q && r[1] === anno) m = r[6]; });
+    var cx = (rj + REG72.rj) * PR, cy = ri + REG72.ri; elenco.push({z:z, m:m, d:distKm69(centro69(i0, j0)[0], centro69(i0, j0)[1], z.lat, z.lon)});
+    sv_.push('<circle cx="' + cx.toFixed(2) + '" cy="' + cy.toFixed(2) + '" r="1.25" fill="' + (m !== null ? colCss72(coloreDet(m)) : '#fff') + '" stroke="#1c2530" stroke-width="0.12"/><text x="' + cx.toFixed(2) + '" y="' + (cy + 0.32).toFixed(2) + '" text-anchor="middle" font-size="0.9" font-weight="800" fill="#1c2530">' + (m !== null ? n1_69(m) : '–') + '</text>');
+  });
+  sv_.push('<text x="' + (W / 2).toFixed(2) + '" y="' + (REG72.ri + 3.1) + '" text-anchor="middle" font-size="1.1" font-weight="700" fill="#1c2530" stroke="#fff" stroke-width="0.25" paint-order="stroke">Reggio</text></svg>');
+  var spread = vmax - vmin, eM = errore69(s, anno, 'pianura', 'media');
+  var li = elenco.sort(function(x, y){ return x.d - y.d; }).map(function(x){ return '<li>«' + esc(x.z.nome) + '» (' + esc(x.z.rete) + '), quota ' + x.z.z + ' m, a ' + distTesto69(x.d) + ': ' + (x.m !== null ? '<strong>' + n1_69(x.m) + ' °C</strong> misurati' : 'nessun dato in questa stagione') + '</li>'; }).join('');
+  // serie storica della cella di Reggio
+  var an = [], val = []; for (var y = 2003; y <= 2025; y++) { var q2 = valori69(s, y, kc); if (q2) { an.push(y); val.push((q2[0] + q2[1]) / 2); } }
+  var urb = null; A69.stz.forEach(function(z, q){ if (z.rete === 'urbane' && /Reggio/.test(z.nome)) urb = q; });
+  var ptsU = []; if (P && urb !== null) P.mis.forEach(function(r){ if (r[0] === urb && r[6] !== null) ptsU.push([r[1], r[6]]); });
+  var lo = Math.min.apply(null, val.concat(ptsU.map(function(p){ return p[1]; }))) - 1.5, hi = Math.max.apply(null, val.concat(ptsU.map(function(p){ return p[1]; }))) + 1.5;
+  lo = Math.floor(lo); hi = Math.ceil(hi);
+  var x0 = 34, x1 = 378, y0 = 14, y1 = 160;
+  function X(a){ return x0 + (a - 2003) / (2025 - 2003) * (x1 - x0); } function Y(t){ return y1 - (t - lo) / (hi - lo) * (y1 - y0); }
+  var g = ['<svg viewBox="0 0 400 200" role="img" aria-label="Serie storica della media della stagione nella cella di Reggio, dal 2003 al 2025">'];
+  var pas = (hi - lo) > 8 ? 2 : 1; for (var t = lo; t <= hi; t += pas) g.push('<line x1="' + x0 + '" x2="' + x1 + '" y1="' + Y(t) + '" y2="' + Y(t) + '" stroke="#e4e4de"/><text x="' + (x0 - 4) + '" y="' + (Y(t) + 4) + '" text-anchor="end" font-size="11" fill="#5b6672">' + t + '</text>');
+  g.push('<polygon points="' + an.map(function(a, q){ return X(a) + ',' + Y(val[q] + errore69(s, a, 'pianura', 'media')); }).join(' ') + ' ' + an.map(function(a, q){ return X(a) + ',' + Y(val[q] - errore69(s, a, 'pianura', 'media')); }).reverse().join(' ') + '" fill="#f2a22a" opacity="0.28"/>');
+  g.push('<polyline points="' + an.map(function(a, q){ return X(a) + ',' + Y(val[q]); }).join(' ') + '" fill="none" stroke="#c25a00" stroke-width="2.5"/>');
+  g.push('<line x1="' + X(2003) + '" x2="' + X(2005.5) + '" y1="' + (y1 + 8) + '" y2="' + (y1 + 8) + '" stroke="#5b6672" stroke-dasharray="4 3"/><text x="' + X(2003) + '" y="' + (y1 + 21) + '" font-size="10" fill="#5b6672">altro metodo</text>');
+  ptsU.forEach(function(p){ g.push('<circle cx="' + X(p[0]) + '" cy="' + Y(p[1]) + '" r="4" fill="#1c2530"/>'); });
+  [2003, 2010, 2015, 2020, 2025].forEach(function(a){ g.push('<text x="' + X(a) + '" y="196" text-anchor="middle" font-size="11" fill="#5b6672">' + a + '</text>'); }); g.push('</svg>');
+  var testa = '<h3 id="tit-reggio72">Reggio, l\'aria in dettaglio</h3><p class="tenue72">' + (anno === null ? 'Media 2006-2025' : esc(quando69(s, anno))) + '. Celle da circa 1 km (per l\'aria non c\'è un dettaglio più fine). Cerchi = centraline, con il numero misurato.</p>';
+  c.innerHTML = testa + sv_.join('') + '<p>Fra le celle intorno a Reggio ' + (anno === null ? 'la media' : 'in questa stagione') + ' varia da ' + n1_69(vmin) + ' a ' + n1_69(vmax) + ' °C: ' + num(Math.round(spread * 10) / 10, 1) + ' °C di differenza, ' + (spread <= 2 * eM ? 'circa quanto' : 'più di') + ' l\'errore (± ' + n1_69(eM) + ' °C).</p>' +
+    '<p><strong>Centraline ARPAE nella zona</strong></p><ul class="elenco72">' + li + '</ul><p><strong>Media della stagione, anno per anno (cella di Reggio)</strong></p>' + g.join('') +
+    '<p class="tenue72">Linea: stima, con la fascia dell\'errore. Punti neri: media misurata dalla centralina urbana. 2003-2005 senza centraline: altro metodo.</p>';
+}
+// il disegno della mappa dell'aria aggiorna anche la vista di Reggio
+(function(){ var d0 = disegna69; disegna69 = function(){ d0(); reggio72(); }; })();
+// la frase sulle stagioni, sotto la mappa in entrambe le modalita'
+(function(){
+  var o = imposta69;
+  imposta69 = function(tipo, inizio){
+    o(tipo, inizio);
+    var e = g69('semplice-onesta');
+    if (e && !g69('stagioni72')) { var p = document.createElement('p'); p.id = 'stagioni72'; p.className = 'onesta ordine-6'; p.textContent = 'Le stagioni sono quelle del meteo. Inverno: da dicembre a febbraio (il dicembre è quello dell\'anno prima). Primavera: da marzo a maggio. Estate: da giugno ad agosto. Autunno: da settembre a novembre. Non sono le stagioni astronomiche, che iniziano il 21 giugno e il 21 settembre.'; e.insertAdjacentElement('beforebegin', p); }
+  };
+})();
+// ===== fine passo 17 =====
 
 disegnaLegenda(); disegnaPiede(); fissaAltezze(); ARIA69.avvia(); aggiorna();
 if (stato.schedaAperta) scheda(true);
